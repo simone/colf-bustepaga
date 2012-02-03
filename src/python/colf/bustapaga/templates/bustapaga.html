@@ -1,0 +1,769 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>COLF Busta Paga</title>
+</head>
+
+
+<body>
+<center>
+
+<table border="3" cellspacing="0"
+       style="border-collapse: collapse; border-left-width:1px; border-right-width:0px; border-top-width:1px; border-bottom-width:1px"
+       bordercolor="#C0C0C0" height="1" cellpadding="0">
+<tbody>
+<tr>
+
+    <td height="1" colspan="6" style="padding:0; border-right-color:#C0C0C0; border-top-color:#C0C0C0"
+        bgcolor="#FAFAEB">
+        <p align="center" style="margin-top: 0; margin-bottom: 0"><b>
+            <font color="#999999" size="6">COLLABORAZIONI DOMESTICHE</font></b></p></td>
+</tr>
+<tr>
+
+
+    <td height="1" colspan="2" style="padding:0; border-left-color:#C0C0C0" rowspan="4">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <b><font face="Arial" size="2">DATORE DI LAVORO</font></b></p></td>
+    <td height="1" colspan="4" style="padding:0; border-right-color:#C0C0C0">
+
+        <p align="left" style="margin-top: 0; margin-bottom: 0">
+            <font size="2" face="Arial"><b>{{ mese.contratto.dl.cognome }} {{ mese.contratto.dl.nome }}&nbsp;</b></font></p></td>
+</tr>
+<tr>
+    <td colspan="4" style="padding:0; border-right-color:#C0C0C0">
+        <font face="Arial" size="1">CF:&nbsp;{{ mese.contratto.dl.cf }}</font></td>
+</tr>
+<tr>
+    <td colspan="4" style="padding:0; border-right-color:#C0C0C0">
+        <font face="Arial" size="1">Via: {{ mese.contratto.dl.indirizzo.via }}, {{ mese.contratto.dl.indirizzo.numero }}&nbsp;</font></td>
+</tr>
+<tr>
+    <td colspan="4" style="padding:0; border-right-color:#C0C0C0">
+        <font face="Arial" size="1">Località: {{ mese.contratto.dl.indirizzo.cap }} - &nbsp;{{ mese.contratto.dl.indirizzo.comune }}&nbsp;&nbsp;({{ mese.contratto.dl.indirizzo.provincia }})</font></td>
+</tr>
+<tr>
+    <td height="1" colspan="2" style="padding:0; border-left-color:#C0C0C0" rowspan="4">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <b>
+                <font face="Arial" size="2">D I P E N D E N T E </font></b></p></td>
+    <td height="1" colspan="4" style="padding:0; border-right-color:#C0C0C0">
+        <p align="left" style="margin-top: 0; margin-bottom: 0">
+            <font size="2" face="Arial"><b>{{ mese.contratto.dip.cognome }} {{ mese.contratto.dip.nome }}</b>&nbsp;</font></p></td>
+</tr>
+<tr>
+    <td colspan="4" style="padding:0; border-right-color:#C0C0C0">
+        <font face="Arial" size="1">CF:&nbsp;{{ mese.contratto.dip.cf }}</font></td>
+</tr>
+<tr>
+    <td colspan="4" style="padding:0; border-right-color:#C0C0C0">
+        <font face="Arial" size="1">Via: {{ mese.contratto.dip.indirizzo.via }}, {{ mese.contratto.dip.indirizzo.numero }}&nbsp;</font></td>
+</tr>
+<tr>
+    <td colspan="4" style="padding:0; border-right-color:#C0C0C0">
+        <font face="Arial" size="1">Località: {{ mese.contratto.dip.indirizzo.cap }} - &nbsp;{{ mese.contratto.dip.indirizzo.comune }}&nbsp;&nbsp;({{ mese.contratto.dip.indirizzo.provincia }})</font></td>
+
+</tr>
+<tr>
+    <td height="1" colspan="2" style="padding:0; border-left-color:#C0C0C0">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="2">TIPO DI CONTRATTO </font></p></td>
+    <td height="1" colspan="4" style="padding:0; border-right-color:#C0C0C0">
+        <p align="left" style="margin-top: 0; margin-bottom: 0">
+            <font size="1" face="Arial">PAGA ORARIA - FINO A 24 ORE - ({{ mese.contratto.ore_settimanali }} ORE SETTIMANALI)&nbsp;</font></p></td>
+</tr>
+<tr>
+    <td height="1" colspan="2" style="padding:0; border-left-color:#C0C0C0">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="2">ASSUNZIONE IN DATA</font></p></td>
+    <td height="1" style="padding:0">
+        <p align="left" style="margin-top: 0; margin-bottom: 0">
+            <font size="2" face="Arial"><b>{{ mese.contratto.data_assunzione|date:"d M Y" }}</b>&nbsp;</font></p></td>
+    <td height="1" style="padding:0; ">
+        <font size="1" face="Arial">cod.inps: {{ mese.contratto.codice_inps }}</font></td>
+    <td height="1" style="padding:0; border-right-color:#C0C0C0" colspan="2">
+        <p align="left"><b><font size="1" face="Arial">LIVELLO</font><font size="3" face="Arial">&nbsp;{{ mese.contratto.livello }}°</font></b></p>
+    </td>
+</tr>
+<tr>
+    <td height="1" colspan="2" style="padding:0; border-left-color:#C0C0C0">
+        <font face="Arial" size="2">MANSIONE SVOLTA</font></td>
+    <td height="1" colspan="4" style="padding:0; border-right-color:#C0C0C0">
+
+        <font size="1" face="Arial">{{ mese.contratto.mansione }}&nbsp;</font></td>
+</tr>
+
+
+<tr>
+    <td height="1" colspan="2" style="padding:0; border-left-color:#C0C0C0">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="2">PERIODO DI PAGA</font></p></td>
+    <td height="1" colspan="4" style="padding:0; border-right-color:#C0C0C0">
+
+        <font size="3" face="Verdana"><b>{{ mese.get_mese_display|upper }}</b>&nbsp;<b>{{ mese.anno }}</b></font></td>
+</tr>
+<tr>
+    <td height="1" align="center" style="padding:0; border-left-color:#C0C0C0" bgcolor="#E6E6E6">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="1">PAGA BASE </font></p></td>
+    <td height="1" align="center" style="padding:0; " bgcolor="#E6E6E6" colspan="2">
+        <font face="Arial" color="#E0E0E0">
+            <p style="margin-top: 0; margin-bottom: 0">
+                <font face="Arial" color="#000000" size="1">SCATTI ANZIANITA'</font></p></font></td>
+    <td height="2" align="center" style="padding:0" bgcolor="#E6E6E6" colspan="2">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" color="#000000" size="1">SUPERMINIMO ASSORBIBILE</font></p></td>
+    <td height="1" align="center" style="padding:0; border-right-color:#C0C0C0" bgcolor="#E6E6E6">
+        <p style="margin-top: 0; margin-bottom: 0">
+
+
+        </p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="1">PAGA ORARIA</font>
+
+        </p></td>
+</tr>
+
+
+<tr>
+
+    <td height="1" style="padding:0; border-left-color:#C0C0C0">
+        <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;
+
+
+            <font size="2" color="#000000" face="Verdana">{{ mese.contratto.paga_base|floatformat:2 }}
+
+            </font></p></td>
+    <td height="1" style="padding:0; " colspan="2">
+        <font face="Arial" color="#E0E0E0">
+            <p align="center" style="margin-top: 0; margin-bottom: 0"><font size="2" color="#000000" face="Verdana">
+                {{ mese.contratto.paga_scatti|floatformat:2 }}</font></p></font></td>
+    <td height="1" style="padding:0; " colspan="2">
+        <p align="center" style="margin-top: 0; margin-bottom: 0"><font size="2" color="#000000"
+                                                                        face="Verdana">{{ mese.contratto.paga_superminimo|floatformat:2 }}</font></p></td>
+    <td height="1" style="padding:0; border-right-color:#C0C0C0">
+
+        <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;<font size="2" color="#000000" face="Verdana">
+            <b>{{ mese.contratto.paga_oraria|floatformat:2 }}</b>
+        </font></p></td>
+</tr>
+
+<tr>
+
+<td height="1" colspan="6" style="padding:0; border-left-color:#C0C0C0; border-right-color:#C0C0C0">
+<div align="center">
+<font face="Arial" color="#E0E0E0">
+
+
+</font>
+<table border="1" cellspacing="0" style="border-collapse: collapse; border-top-width:0px; border-right-width:0px"
+       bordercolor="#C0C0C0" bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0" height="1" width="645"
+       cellpadding="0">
+
+
+<tbody>
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-right-style:solid; border-right-width:1; border-top-style:none; border-top-width:medium; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0" align="left"><b>
+            <font face="Arial" size="2">DESCRIZIONE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font></b>
+        </p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-right-style:solid; border-right-width:1; border-top-style:none; border-top-width:medium"
+        bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1" width="109">
+        <font face="Verdana" size="1" color="#000000">RIFERIMENTO</font></td>
+    <td style="border-left-style:solid; border-left-width:1; border-right-style:solid; border-right-width:1; border-top-style:none; border-top-width:medium"
+        bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1" width="88">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Verdana" size="1" color="#000000">ORE/GIORNI</font></p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:none; border-left-width:1; border-top-width:medium"
+        bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1" width="104">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1" color="#000000"><b>IMPORTO</b> </font>
+        </p></td>
+</tr>
+
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">RETRIBUZIONE LORDA
+            PER ORE LAVORATE </font></p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p style="margin-top: 0; margin-bottom: 0" align="right"></p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+
+            <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.bustapaga.paga_ore_lavorate|floatformat:2 }}</font></p></td>
+</tr>
+
+
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="19" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">RETRIBUZIONE PER GIORNI DI FESTIVITA'&nbsp;</font>
+        </p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="19" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="19" width="88">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">{{ mese.giorni_festivita|floatformat:2 }}</font></p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="19" width="104">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">{{ mese.bustapaga.paga_festivita|floatformat:2 }}</font></p></td>
+</tr>
+
+
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <font face="Arial" size="1">GIORNI LAVORABILI NEL MESE</font></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p align="right">
+        </p>
+
+        <p align="right"><font size="2" color="#000000" face="Verdana">&nbsp;
+            {{ mese.giorni_lavorabili|floatformat:2 }}</font></p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+    </td>
+</tr>
+
+
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="1">ORE RETRIBUITE COMPLESSIVAMENTE</font></p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p align="right" style="margin-top: 0; margin-bottom: 0">
+            <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.bustapaga.ore_retribuite|floatformat:2 }}</font></p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p style="margin-top: 0; margin-bottom: 0">
+        </p></td>
+</tr>
+
+
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="1">ORE LAVORATE NEL MESE</font></p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+
+
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p align="right" style="margin-top: 0; margin-bottom: 0">
+            <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.ore_lavorate|floatformat:2 }}</font>
+        </p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p style="margin-top: 0; margin-bottom: 0">
+        </p></td>
+</tr>
+
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">&nbsp;</font></p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p style="margin-top: 0; margin-bottom: 0">
+        </p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p align="right" style="margin-top: 0; margin-bottom: 0">
+            <font size="2" color="#000000" face="Verdana">&nbsp;
+
+            </font></p></td>
+</tr>
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">&nbsp;</font></p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p style="margin-top: 0; margin-bottom: 0">
+        </p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p align="right" style="margin-top: 0; margin-bottom: 0">
+            <font size="2" color="#000000" face="Verdana">&nbsp;
+
+            </font></p></td>
+</tr>
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">&nbsp;</font></p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p style="margin-top: 0; margin-bottom: 0">
+        </p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p align="right" style="margin-top: 0; margin-bottom: 0">
+            <font size="2" color="#000000" face="Verdana">&nbsp;
+
+
+            </font></p></td>
+</tr>
+
+
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:solid; border-right-width:1px; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" bgcolor="#E6E6E6" height="19">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">&nbsp;</p></td>
+
+    <td style="border-style:solid; border-width:1px; padding:0; " bordercolor="#808080" bgcolor="#E6E6E6" height="19"
+        colspan="2">
+        <font face="Arial">
+            <p style="margin-top: 0; margin-bottom: 0" align="right">
+                <b><font face="Arial" size="2">TOTALE LORDO</font></b></p></font></td>
+
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-width:1px"
+        bordercolor="#808080" bgcolor="#E6E6E6" height="19">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <b>
+                <font size="2" color="#000000" face="Verdana">{{ mese.bustapaga.totale_lordo|floatformat:2 }}</font></b></p></td>
+</tr>
+<tr>
+    <td style="border-right:1px solid #C0C0C0; border-left:1px solid #E6E6E6; padding:0; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" height="16" colspan="4">
+        <p align="center"><i><b>TRATTENUTE</b></i></p></td>
+</tr>
+
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:solid; border-right-width:1px; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" height="16">
+    </td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" height="16">
+        <p align="center"><font size="1" color="#000000" face="Arial"> ORE x
+            CONTRIBUTI</font></p></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" height="16">
+        <p align="center"><font size="1">QUOTA ORARIA</font></p></td>
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" height="16">
+        <p align="center"><font size="1" color="#000000" face="Arial">TRATTENUTE</font></p></td>
+</tr>
+
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:solid; border-right-width:1px; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" height="17">
+        <font face="Arial" size="1">
+            <p align="right">TRATTENUTE INPS &nbsp;&nbsp;&nbsp;
+            </p></font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" height="17">
+        <font size="1" color="#000000" face="Arial">
+            <p align="center">&nbsp;&nbsp;<font size="1" color="#000000" face="Arial">&nbsp;{{ mese.bustapaga.ore_retribuite|floatformat:2 }}
+            </font>&nbsp;</p></font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" height="17">
+        <p align="center" style="margin-top: 0; margin-bottom: 0"><font size="1" color="#000000" face="Arial">{{ mese.contratto.quota_oraria_dip_trattenuta_inps|floatformat:2 }}
+        </font></p></td>
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" height="17" align="right">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font size="2" color="#590000" face="Verdana">-&nbsp;<b>{{ mese.bustapaga.trattenuta_inps|floatformat:2 }}</b></font></p></td>
+
+</tr>
+
+
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:solid; border-right-width:1px; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" height="17">
+        <font face="Arial" size="1">
+            <p align="right">TRATTENUTA OBBLIGATORIA CAS.SA MALATTIA COLF&nbsp; &nbsp;&nbsp;
+            </p></font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" height="17">
+        <p align="center"><font size="1" color="#000000" face="Arial">&nbsp;&nbsp;{{ mese.bustapaga.ore_retribuite|floatformat:2 }}&nbsp;
+        </font></p></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" height="17">
+
+        <p align="center"><font size="1" color="#000000" face="Arial">{{ mese.contratto.quota_oraria_dip_trattenuta_malattia|floatformat:2 }}</font></p></td>
+
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" height="17" align="right">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#590000">
+                <input type="hidden" name="ristampabusta" value="ok">
+
+            </font>
+
+            <font size="2" color="#590000" face="Verdana">-&nbsp;<b>{{ mese.bustapaga.trattenuta_cassa_colf|floatformat:2 }}</b>
+
+
+            </font></p></td>
+</tr>
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:none; border-right-width:medium; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" colspan="3" height="17">
+        <p align="right"><i><b><font size="2" color="#800000">TOTALE TRATTENUTE</font></b></i></p></td>
+    <td style="border-style:ridge; padding-left:4px; padding-right:4px; padding-top:1px; padding-bottom:1px"
+        bordercolor="#808080" height="17" align="right">
+        <p align="right">
+
+            <font size="2" color="#800000" face="Verdana">
+
+                &nbsp;<b>{{ mese.bustapaga.totale_trattenute|floatformat:2 }}</b>
+            </font></p></td>
+
+</tr>
+
+
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:none; border-right-width:medium; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" colspan="3" height="17">
+    </td>
+    <td style="border-style:ridge; padding-left:4px; padding-right:4px; padding-top:1px; padding-bottom:1px"
+        bordercolor="#808080" height="17">
+    </td>
+</tr>
+<tr>
+    <td align="right"
+        style="border-left:1px solid #E6E6E6; padding:0; border-right-style:none; border-right-width:medium; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" colspan="3" height="17">
+        <font face="Arial" size="1">ARROTONDAMENTO MESE PRECEDENTE</font></td>
+    <td align="right"
+        style="border-style:ridge; padding-left:4px; padding-right:4px; padding-top:1px; padding-bottom:1px"
+        bordercolor="#808080" height="17">
+        <font face="Verdana" color="#000000" size="2">{{ mese.bustapaga.arrotondamento_mese_precedente|floatformat:2 }}</font></td>
+</tr>
+<tr>
+    <td align="right"
+        style="border-left:1px solid #E6E6E6; padding:0; border-right-style:none; border-right-width:medium; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" colspan="3" height="17">
+        <font face="Arial" size="1">ARROTONDAMENTO MESE ATTUALE</font></td>
+
+    <td align="right"
+        style="border-style:ridge; padding-left:4px; padding-right:4px; padding-top:1px; padding-bottom:1px"
+        bordercolor="#808080" height="17">
+        <font face="Verdana" color="#000000" size="2">{{ mese.bustapaga.arrotondamento|floatformat:2 }}</font></td>
+</tr>
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:none; border-right-width:medium; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" colspan="3" height="17">
+    </td>
+    <td style="border-style:ridge; padding-left:4px; padding-right:4px; padding-top:1px; padding-bottom:1px"
+        bordercolor="#808080" height="17">
+    </td>
+</tr>
+
+
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:solid; border-right-width:1px; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" colspan="3" height="17" bgcolor="#E0E0E0">
+        <p style="margin-top: 0; margin-bottom: 0" align="right"><font face="Arial">
+            <b>&nbsp;NETTO PAGATO</b></font></p></td>
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:none; border-left-width:1px; border-top-width:medium; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" height="17" bgcolor="#E0E0E0">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+
+
+            <font size="3" color="#000000" face="Verdana">&nbsp;<b>{{ mese.bustapaga.netto_pagato|floatformat:2 }}
+            </b></font></p></td>
+</tr>
+
+<tr>
+    <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" colspan="3" height="1">
+    </td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-left-width:1; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+    </td>
+</tr>
+
+<tr>
+    <td style="border-right:1px solid #C0C0C0; border-left:1px solid #E6E6E6; padding:0; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" colspan="4" height="17">
+    </td>
+</tr>
+
+<tr>
+    <td style="border-right:1px solid #C0C0C0; border-left:1px solid #E6E6E6; padding:0; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" colspan="4" height="17">
+        <p align="center"><b>ARCHIVIO MATURAZIONE RATEI</b></p></td>
+</tr>
+
+<tr>
+    <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" colspan="3" height="1">
+    </td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-left-width:1; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+    </td>
+</tr>
+
+<tr>
+    <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" colspan="3" height="1">
+    </td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-left-width:1; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+    </td>
+</tr>
+
+
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:solid; border-right-width:1px; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" align="left" bgcolor="#E6E6E6" height="17">
+
+        &nbsp;</td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+
+        <font color="#000000" face="Arial" style="font-size: 7pt">TFR MATURATO</font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+
+        <font color="#000000" face="Arial" style="font-size: 7pt">TFR ANTICIPATO</font></td>
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-width:1px"
+        bordercolor="#808080" align="center" bgcolor="#E6E6E6" height="17">
+        <font color="#000000" face="Arial" style="font-size: 7pt">TFR QUOTA MESE</font></td>
+</tr>
+<tr>
+    <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:solid; border-right-width:1px; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"
+        bordercolor="#808080" align="left" bgcolor="#E6E6E6" height="17">
+
+        <font face="Arial" color="#E0E0E0">
+            <p align="center">
+
+                <font size="1" color="#000000" face="Arial">ACCANTONAMENTO TFR</font></p></font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <font size="1" face="Arial">&nbsp;{{ mese.statocontrattuale.tfr_accumulato|floatformat:2 }}
+        </font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <font size="1" face="Arial">&nbsp;{{ mese.statocontrattuale.tfr_anticipato|floatformat:2 }}
+        </font></td>
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-width:1px"
+        bordercolor="#808080" align="center" bgcolor="#E6E6E6" height="17">
+        <font size="1" face="Arial">&nbsp;{{ mese.statocontrattuale.tfr_quota_mese|floatformat:2 }}
+        </font></td>
+</tr>
+
+
+<tr>
+
+    <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1"
+        width="326">
+
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">ORE DI FERIE DOVUTE
+            FINO AL MESE DI {{ mese.get_mese_display|upper }}&nbsp;{{ mese.anno }}</font></p></td>
+    <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1"
+        width="109">
+        <font face="Arial" style="font-size: 7pt">&nbsp;ORE DI FERIE GODUTE
+        </font></td>
+    <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1"
+        width="88">
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" style="font-size: 7pt">ORE FERIE RESIDUE</font></p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1" width="104">
+        <font face="Arial">
+            <p style="margin-top: 0; margin-bottom: 0"><font style="font-size: 7pt">FERIE</font></p></font>
+
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial">
+            <font style="font-size: 7pt">UGUALE</font></font><font color="#000000" face="Arial" style="font-size: 7pt">
+            &nbsp;A GIORNI</font></p></td>
+</tr>
+<tr>
+    <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1"
+        width="326">
+        &nbsp;<font size="1" color="#666666" face="Verdana">{{ mese.statocontrattuale.ore_ferie_dovute|floatformat:2 }}</font></td>
+    <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1"
+        width="109">
+        &nbsp;&nbsp;<font size="1" color="#666666" face="Verdana">{{ mese.statocontrattuale.ore_ferie_godute|floatformat:2 }}</font></td>
+    <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1"
+        width="88">
+        &nbsp;<font size="1" color="#666666" face="Verdana">{{ mese.statocontrattuale.ore_ferie_residue|floatformat:2 }}
+    </font></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1" width="104">
+        <font face="Arial" color="#E0E0E0">
+            <font size="1" color="#666666" face="Verdana">{{ mese.statocontrattuale.giorni_ferie_residue|floatformat:2 }}</font></font></td>
+
+</tr>
+<tr>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+        &nbsp;</td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">DATORE DI LAVORO </font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">EURO&nbsp;&nbsp; {{ mese.contratto.quota_oraria_dl_trattenuta_inps|floatformat:2 }} PER</font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">OGNI ORA RETRIBUITA</font></p></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">DIPENDENTE </font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">EURO {{ mese.contratto.quota_oraria_dip_trattenuta_inps|floatformat:2 }}</font><font face="Arial"
+                                                                                                                                                 style="font-size: 7pt">
+            PER</font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">OGNI ORA RETRIBUITA</font></p></td>
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-width:1px"
+        bordercolor="#808080" align="center" bgcolor="#E6E6E6" height="17">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">TOTALE</font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">CONTRIBUTI INPS</font></p></td>
+</tr>
+<tr>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <font size="1" color="#000000" face="Arial">CONTRIBUTI INPS</font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <font size="1" color="#000000" face="Arial">&nbsp;{{ mese.statocontrattuale.contributi_inps_dl|floatformat:2 }}</font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <font size="1" color="#000000" face="Arial">&nbsp;{{ mese.statocontrattuale.contributi_inps_dip|floatformat:2 }}</font></td>
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-width:1px"
+        bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="17">
+
+        <font size="1" color="#000000" face="Arial">{{ mese.statocontrattuale.totale_contributi_inps|floatformat:2 }}&nbsp;</font></td>
+</tr>
+
+<tr>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+        &nbsp;</td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">DATORE DI LAVORO </font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">EURO&nbsp;&nbsp; {{ mese.contratto.quota_oraria_dl_trattenuta_malattia|floatformat:2 }} PER</font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">OGNI ORA RETRIBUITA</font></p></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#808080" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">DIPENDENTE </font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">EURO {{ mese.contratto.quota_oraria_dip_trattenuta_malattia|floatformat:2 }}</font><font face="Arial"
+                                                                                                                                                               style="font-size: 7pt">
+            PER</font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">OGNI ORA RETRIBUITA</font></p></td>
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-width:1px"
+        bordercolor="#808080" align="center" bgcolor="#E6E6E6" height="17">
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">TOTALE</font></p>
+
+        <p style="margin-top: 0; margin-bottom: 0">
+            <font color="#000000" face="Arial" style="font-size: 7pt">CAS.SA COLF</font></p></td>
+</tr>
+<tr>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <font size="1" color="#000000" face="Arial">CAS.SA MALATTIA OBBLIGATORIA&nbsp; DAL 01-07-2010</font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <font size="1" color="#000000" face="Arial">&nbsp;{{ mese.statocontrattuale.cassa_colf_dl|floatformat:2 }}</font></td>
+    <td style="padding:0; border-width:1px; border-style:solid" bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6"
+        height="17">
+        <font size="1" color="#000000" face="Arial">&nbsp;{{ mese.statocontrattuale.cassa_colf_dip|floatformat:2 }}</font></td>
+    <td style="padding:0; border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1px; border-top-width:1px; border-bottom-width:1px"
+        bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="17">
+
+        <font size="1" color="#000000" face="Arial">{{ mese.statocontrattuale.totale_cassa_colf|floatformat:2 }}&nbsp;</font></td>
+</tr>
+
+<tr>
+    <td style="border-right:1px solid #C0C0C0; border-bottom:3px solid #C0C0C0; border-left-style:solid; border-left-width:1"
+        bordercolor="#C0C0C0" bgcolor="#FAFAEB" colspan="4" height="50">
+        <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+
+        <p align="center" style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="1" color="#999999">Firma&nbsp;del
+                datore di lavoro __________________________</font></p>
+
+        <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+
+        <p align="center" style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="2" color="#666666"><b>RICEVUTA MESE DI</b></font></p>
+
+        <p align="center" style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="2"><b>&nbsp;{{ mese.get_mese_display|upper }}&nbsp;{{ mese.anno }}</b></font></p><font face="Arial" size="2">
+
+        <p align="center" style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="1" color="#999999">Dichiaro di aver preso visione
+                delle scritture sopra indicate, riconoscendone esatti i conteggi.</font></p>
+
+        <p align="center" style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="1" color="#999999">Dichiaro esatta la somma consegnatami, per la quale rilascio
+                ricevuta a saldo
+                di ogni&nbsp;
+                mia</font></p>
+
+        <p align="center" style="margin-top: 0; margin-bottom: 0">
+            <font face="Arial" size="1" color="#999999">competenza per il lavoro ordinario ed
+                eventuale straordinario prestato nel mese</font></p>
+    </font>
+        <font face="Arial" size="1" color="#C0C0C0">
+            <p align="center" style="margin-top: 0; margin-bottom: 0">
+                <font face="Verdana" size="1" color="#999999">Ritiro
+                    contestualmente copia della presente firmata dal datore di lavoro</font></p>
+
+            <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+
+            <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+        </font>
+        <font face="Arial" size="1" color="#999999">
+            <p align="center" style="margin-top: 0; margin-bottom: 0">Firma&nbsp;del
+                dipendente&nbsp;&nbsp; ______________________________________</p>
+            <font face="Arial" size="1" color="#C0C0C0">
+                <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+            </font></font></td>
+</tr>
+</tbody>
+</table>
+</div>
+<font face="Arial" color="#E0E0E0">
+</font></td>
+</tr>
+</tbody>
+</table>
+</center>
+</body>
+</html>
