@@ -31,6 +31,8 @@ class BustaPagaManager(models.Manager):
             obj.paga_festivita = mese.giorni_festivita * mese.contratto.retribuzione_giornaliera_globale_di_fatto
             #if mese.giorni_festivita_domenica>0:
             #    obj.paga_festivita += mese.giorni_festivita_domenica * quota_giornaliera_di_fatto
+        else:
+            obj.paga_festivita = 0
 
         obj.ore_retribuite = mese.ore_lavorate + obj.paga_festivita / mese.contratto.paga_oraria
         obj.trattenuta_inps = obj.ore_retribuite*mese.contratto.quota_oraria_dip_trattenuta_inps

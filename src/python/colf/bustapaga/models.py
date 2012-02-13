@@ -25,6 +25,9 @@ class Luogo(models.Model):
     via = models.CharField(max_length=200)
     numero = models.CharField(max_length=10)
 
+    class Meta:
+        verbose_name_plural = "Luoghi"
+
     def __unicode__(self):
         return "%s, %s %s %s (%s)" % (
             self.via, self.numero, self.cap, self.comune, self.provincia
@@ -45,10 +48,14 @@ class Persona(models.Model):
 
 
 class DatoreLavoro(Persona):
-    pass
+    class Meta:
+        verbose_name = "Datore di lavoro"
+        verbose_name_plural = "Datori di lavoro"
+
 
 class Dipendente(Persona):
-    pass
+    class Meta:
+        verbose_name_plural = "Dipendenti"
 
 
 class Contratto(models.Model):
@@ -62,6 +69,9 @@ class Contratto(models.Model):
     paga_base = models.DecimalField(max_digits=11, decimal_places=2)
     paga_scatti = models.DecimalField(max_digits=11, decimal_places=2)
     paga_superminimo = models.DecimalField(max_digits=11, decimal_places=2)
+
+    class Meta:
+        verbose_name_plural = "Contratti"
 
     @property
     def quota_oraria_trattenuta_inps(self):
@@ -153,6 +163,21 @@ class Mese(models.Model):
     giorni_lavorabili = models.SmallIntegerField()
     giorni_festivita = models.SmallIntegerField()
 
+    class Meta:
+        verbose_name = "Mese lavorato"
+        verbose_name_plural = "Mesi lavorati"
+
+    def elaborato(self):
+        try:
+            return bool(self.bustapaga and self.statocontrattuale)
+        except:
+            return False
+    elaborato.boolean = True
+
+    def annullabile(self):
+        return self.elaborato() and not self.has_mese_successivo
+    annullabile.boolean = True
+
     @property
     def giorni_ferie_goduti(self):
         return 0
@@ -170,22 +195,22 @@ class Mese(models.Model):
 
     @cached_property
     def mese_precedente(self):
-        a, m = (self.anno, self.mese) if self.mese > 1 else (self.anno-1, 12)
+        a, m = (self.anno, self.mese-1) if self.mese > 1 else (self.anno-1, 12)
+        print self.anno, self.mese, a, m, self.mese > 1
         return self.contratto.mese_set.get(anno=a, mese=m)
 
     @property
     def has_mese_successivo(self):
         try:
-            self.mese_precedente
+            self.mese_successivo
         except:
             return False
         return True
 
     @cached_property
     def mese_successivo(self):
-        a, m = (self.anno, self.mese) if self.mese < 12 else (self.anno+1, 1)
+        a, m = (self.anno, self.mese+1) if self.mese < 12 else (self.anno+1, 1)
         return self.contratto.mese_set.get(anno=a, mese=m)
-
 
     def __unicode__(self):
         return u"%s %s" % (self.get_mese_display(), self.anno)
@@ -224,6 +249,9 @@ class BustaPaga(models.Model):
         return self.totale_lordo - self.totale_trattenute \
                + self.arrotondamento_mese_precedente + self.arrotondamento
 
+    class Meta:
+        verbose_name_plural = "Buste paga"
+
     def __unicode__(self):
         return unicode(self.mese)
 
@@ -261,10 +289,13 @@ class StatoContrattuale(models.Model):
     def totale_contributi_inps(self):
         return self.contributi_inps_dl + self.contributi_inps_dip
 
+    class Meta:
+        verbose_name_plural = "Stati Contrattuali"
+
     def __unicode__(self):
         return unicode(self.mese)
 
-    def makecopy(self, *kwargs):
+    def makecopy(self, **kwargs):
         new = copy(self)
         for k,v in kwargs.items():
             setattr(new, k, v)
@@ -277,3 +308,6 @@ class Versamento(models.Model):
     trimestre = models.SmallIntegerField(
         choices=((1,"Primo Trimestre"),(2,"Secondo Trimestre"),(3,"Terzo Trimestre"),(4,"Quarto Trimestre"))
     )
+
+    class Meta:
+        verbose_name_plural = "Versamenti"
