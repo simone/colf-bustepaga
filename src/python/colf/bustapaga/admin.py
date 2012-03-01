@@ -119,7 +119,7 @@ site.register(DatoreLavoro)
 site.register(Dipendente)
 site.register(Contratto)
 site.register(Luogo)
-
+site.register(Localita)
 site.register(Mese, MeseAdmin)
 
 #site.register(BustaPaga, ReadOnlyModelAdmin)

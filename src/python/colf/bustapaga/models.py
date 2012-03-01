@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from decimal import Decimal
+import datetime
 from django.db import models
 
 from django.contrib.localflavor.it.forms import ITSocialSecurityNumberField, ITZipCodeField
@@ -6,6 +9,7 @@ from django.utils.dates import MONTHS
 from django.utils.functional import cached_property
 
 from colf.bustapaga.managers import BustaPagaManager, StatoContrattualeManager
+from colf.common import festivity
 from copy import copy
 
 class CF(models.CharField):
@@ -17,10 +21,39 @@ class CF(models.CharField):
         kwargs.setdefault("form_class", ITSocialSecurityNumberField)
         return super(CF, self).formfield(**kwargs)
 
-class Luogo(models.Model):
+class YearField(models.PositiveSmallIntegerField):
+    def formfield(self, **kwargs):
+        defaults = {'min_value': 1900, 'max_value': 9999}
+        defaults.update(kwargs)
+        return super(YearField, self).formfield(**defaults)
+
+class Localita(models.Model):
+    nome = models.CharField(max_length=200)
     comune = models.CharField(max_length=200)
     provincia  = models.CharField(max_length=2)
     regione = models.CharField(max_length=3)
+    patrono = models.CharField(max_length=200)
+    giorno_patrono = models.DateField(help_text=("L'anno verrà ignorato"))
+
+    @property
+    def full_name(self):
+        return self.comune if self.comune==self.nome else "%s (%s)" % (self.comune, self.nome)
+
+    def get_patrono(self, anno=None):
+        return datetime.date(anno,
+            self.giorno_patrono.month,
+            self.giorno_patrono.day) if anno else self.giorno_patrono, self.patrono
+
+    class Meta:
+        verbose_name_plural = "Localita"
+
+    def __unicode__(self):
+        return "%s, (%s) [%s,%s]" % (
+            self.full_name, self.provincia, self.regione, self.patrono
+            )
+
+class Luogo(models.Model):
+    localita = models.ForeignKey(Localita)
     cap = models.CharField(max_length=5)
     via = models.CharField(max_length=200)
     numero = models.CharField(max_length=10)
@@ -29,8 +62,8 @@ class Luogo(models.Model):
         verbose_name_plural = "Luoghi"
 
     def __unicode__(self):
-        return "%s, %s %s %s (%s)" % (
-            self.via, self.numero, self.cap, self.comune, self.provincia
+        return "%s, %s %s %s" % (
+            self.via, self.numero, self.cap, self.localita
         )
 
 
@@ -58,9 +91,53 @@ class Dipendente(Persona):
         verbose_name_plural = "Dipendenti"
 
 
+class TabellaINPS(object):
+    def __init__(self, tabella, oltre_24_ore):
+        self.tabella = [[Decimal(x) if x else x for x in t] for t in tabella]
+        self.oltre_24_ore = [Decimal(x) for x in oltre_24_ore]
+
+    def _find_line(self, paga_oraria_effettiva, ore_settimanali, cuaf):
+        if ore_settimanali>24:
+            conv, c_tot_cuaf, c_dip_cuaf, c_tot, c_dip = self.oltre_24_ore
+
+        else:
+            for m, M, conv, c_tot_cuaf, c_dip_cuaf, c_tot, c_dip in self.tabella:
+                if M and m < paga_oraria_effettiva <= M:
+                    break
+
+        _tot = c_tot_cuaf if cuaf else c_tot
+        _dip = c_dip_cuaf if cuaf else c_dip
+        return conv, _tot, _dip
+
+    def paga_convenzionale(self, paga_oraria_effettiva, ore_settimanali, cuaf=False):
+        return self._find_line(paga_oraria_effettiva, ore_settimanali, cuaf)[0]
+
+    def quota_oraria_trattenuta_inps(self, paga_oraria_effettiva, ore_settimanali, cuaf=False):
+        return self._find_line(paga_oraria_effettiva, ore_settimanali, cuaf)[1]
+
+    def quota_oraria_dip_trattenuta_inps(self, paga_oraria_effettiva, ore_settimanali, cuaf=False):
+        return self._find_line(paga_oraria_effettiva, ore_settimanali, cuaf)[2]
+
+
+TABELLA_INPS = {
+    2012 : TabellaINPS((
+        # DECORRENZA DAL 1 GENNAIO 2012 AL 31 DICEMBRE 2012
+        # LAVORATORI ITALIANI E STRANIERI
+        # IMPORTO CONTRIBUTO ORARIO Effettiva e Convenzionale
+        # Comprensivo quota CUAF e Senza quota CUAF (1)
+        (   "0",     "7.54", "6.68", "1.40", "0.34", "1.41", "0.34"),
+        ("7.54",     "9.19", "7.54", "1.58", "0.38", "1.59", "0.38"),
+        ("9.19", "Infinity", "9.19", "1.93", "0.46", "1.94", "0.46")),
+        # Orario di lavoro superiore a 24 ore settimanali
+        (            "4.85", "1.02", "0.24", "1.02", "0.24"),
+    )
+}
+
+
 class Contratto(models.Model):
     dl = models.ForeignKey(DatoreLavoro)
     dip = models.ForeignKey(Dipendente)
+    sede = models.ForeignKey(Luogo)
     data_assunzione = models.DateField()
     mansione = models.CharField(max_length=200)
     codice_inps = models.CharField(max_length=200)
@@ -75,11 +152,11 @@ class Contratto(models.Model):
 
     @property
     def quota_oraria_trattenuta_inps(self):
-        return Decimal("1.54") if self.paga_oraria_effettiva>Decimal("7.34") else Decimal("1.36")
+        return TABELLA_INPS[2012].quota_oraria_trattenuta_inps(self.paga_oraria_effettiva, self.ore_settimanali)
 
     @property
     def quota_oraria_dip_trattenuta_inps(self):
-        return Decimal("0.37") if self.paga_oraria_effettiva>Decimal("7.34") else Decimal("0.33")
+        return TABELLA_INPS[2012].quota_oraria_dip_trattenuta_inps(self.paga_oraria_effettiva, self.ore_settimanali)
 
     @property
     def quota_oraria_dl_trattenuta_inps(self):
@@ -148,11 +225,8 @@ class Contratto(models.Model):
             self.dip, self.dl
         )
 
-class YearField(models.PositiveSmallIntegerField):
-    def formfield(self, **kwargs):
-        defaults = {'min_value': 1900, 'max_value': 9999}
-        defaults.update(kwargs)
-        return super(YearField, self).formfield(**defaults)
+
+
 
 class Mese(models.Model):
     anno = YearField()
@@ -161,7 +235,12 @@ class Mese(models.Model):
     contratto = models.ForeignKey(Contratto)
 
     giorni_lavorabili = models.SmallIntegerField()
-    giorni_festivita = models.SmallIntegerField()
+
+    @cached_property
+    def giorni_festivita(self):
+        if self.anno and self.mese and self.contratto:
+            return len(festivity.festivita_italiane(self.anno, self.contratto.sede.localita.nome, self.mese))
+        return 0
 
     class Meta:
         verbose_name = "Mese lavorato"
@@ -311,3 +390,12 @@ class Versamento(models.Model):
 
     class Meta:
         verbose_name_plural = "Versamenti"
+
+
+def patrono(anno, citta):
+    try:
+        loc = Localita.objects.get(nome=citta)
+        return loc.get_patrono(anno)
+    except:
+        pass
+festivity.registra_patrono_datasource(patrono)
