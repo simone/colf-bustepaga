@@ -141,7 +141,9 @@ class Contratto(models.Model):
     data_assunzione = models.DateField()
     mansione = models.CharField(max_length=200)
     codice_inps = models.CharField(max_length=200)
+    codice_rapporto = models.CharField(max_length=200)
     livello = models.CharField(max_length=2, choices=(("A","A"),("B","B")))
+    cassa_malattia = models.CharField(max_length=2, choices=(("F2", "Cassa Colf"),("E1", "Ebilcoba")))
 
     paga_base = models.DecimalField(max_digits=11, decimal_places=2)
     paga_scatti = models.DecimalField(max_digits=11, decimal_places=2)
@@ -328,6 +330,10 @@ class BustaPaga(models.Model):
         return self.totale_lordo - self.totale_trattenute \
                + self.arrotondamento_mese_precedente + self.arrotondamento
 
+    @property
+    def contratto(self):
+        return self.mese.contratto
+
     class Meta:
         verbose_name_plural = "Buste paga"
 
@@ -384,13 +390,29 @@ class StatoContrattuale(models.Model):
 # bozza
 class Versamento(models.Model):
     contratto = models.ForeignKey(Contratto)
+    anno = YearField()
     trimestre = models.SmallIntegerField(
         choices=((1,"Primo Trimestre"),(2,"Secondo Trimestre"),(3,"Terzo Trimestre"),(4,"Quarto Trimestre"))
     )
+    data_versamento = models.DateField()
+    codice_banca = models.CharField(max_length=200)
 
+    ore_intere_retribuite = models.SmallIntegerField()
+    resto_ore_retribuite = models.DecimalField(max_digits=11, decimal_places=2, default=Decimal(0)) # da pagare il trimestre successivo
+    retribuzione_oraria_effettiva = models.DecimalField(max_digits=11, decimal_places=2, default=Decimal(0))
+    importo_cassa_malattia = models.DecimalField(max_digits=11, decimal_places=2, default=Decimal(0))
+    importo_contributi = models.DecimalField(max_digits=11, decimal_places=2, default=Decimal(0))
+
+    @property
+    def importo_totale(self):
+        return self.importo_cassa_malattia + self.importo_contributi
+    
     class Meta:
         verbose_name_plural = "Versamenti"
 
+
+    def __unicode__(self):
+        return "%s %s-%s" %(unicode(self.contratto), self.trimestre, self.anno)
 
 def patrono(anno, citta):
     try:

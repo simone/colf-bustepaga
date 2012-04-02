@@ -113,6 +113,10 @@ class MeseAdmin(ModelAdmin):
 
         return urlpatterns
 
+class VersamentoAdmin(ModelAdmin):
+    list_display = ["contratto", "anno", "trimestre", "importo_cassa_malattia", "importo_contributi", "importo_totale"]
+    # actions = ["calcola_bustapaga", "rimuovi_bustapaga"]
+    list_filter = ["contratto__dip", "contratto__dl", "anno", "trimestre"]
 
 
 site.register(DatoreLavoro)
@@ -121,6 +125,10 @@ site.register(Contratto)
 site.register(Luogo)
 site.register(Localita)
 site.register(Mese, MeseAdmin)
+site.register(Versamento, VersamentoAdmin)
 
-#site.register(BustaPaga, ReadOnlyModelAdmin)
+class BustaPagaAdmin(ReadOnlyModelAdmin):
+    list_display = ["mese", "contratto", "totale_lordo", "totale_trattenute", "arrotondamento", "netto_pagato"]
+
+site.register(BustaPaga, BustaPagaAdmin)
 #site.register(StatoContrattuale, ReadOnlyModelAdmin)
