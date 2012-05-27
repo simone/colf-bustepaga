@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from decimal import Decimal
 from django.db import models
 
 __author__ = 'aldaran'
@@ -13,16 +15,26 @@ class BustaPagaManager(models.Manager):
         obj.paga_ore_lavorate = mese.ore_lavorate * mese.contratto.paga_oraria
         quota_giornaliera = obj.paga_ore_lavorate / 26
 
+        obj.paga_straordinario_25 = mese.straordinario_25 * mese.contratto.paga_oraria * Decimal("1.25")
+        obj.paga_straordinario_50 = mese.straordinario_50 * mese.contratto.paga_oraria * Decimal("1.50")
+        obj.paga_straordinario_60 = mese.straordinario_60 * mese.contratto.paga_oraria * Decimal("1.60")
+
         #if mese.ore_lavorate_durante_festivita>0:
         #    pass
 
         ore_lavorabili = mese.giorni_lavorabili * mese.contratto.ore_giornaliere
-        ore_non_lavorate=ore_lavorabili-mese.ore_lavorate
+        ore_non_lavorate=ore_lavorabili-mese.ore_lavorate-mese.giorni_ferie_goduti
+
+        if mese.giorni_ferie_goduti>0:
+            # calcolo ferie/permessi
+            obj.paga_ferie = mese.giorni_ferie_goduti * mese.contratto.retribuzione_giornaliera_globale_di_fatto
+        else:
+            obj.paga_ferie = 0
 
         if ore_non_lavorate>0:
-            # calcolo ferie/permessi
+            # non è venuta.... o ha fatto meno ore che si fa?
+            # permessi
             pass
-
         elif ore_non_lavorate<0:
             # straordinario
             pass
@@ -34,7 +46,8 @@ class BustaPagaManager(models.Manager):
         else:
             obj.paga_festivita = 0
 
-        obj.ore_retribuite = mese.ore_lavorate + obj.paga_festivita / mese.contratto.paga_oraria
+        obj.ore_retribuite = mese.ore_lavorate + (obj.paga_festivita + obj.paga_straordinario) / mese.contratto.paga_oraria + mese.ore_ferie_godute
+
         obj.trattenuta_inps = obj.ore_retribuite*mese.contratto.quota_oraria_dip_trattenuta_inps
         obj.trattenuta_cassa_colf = obj.ore_retribuite*mese.contratto.quota_oraria_dip_trattenuta_malattia
 
@@ -46,9 +59,6 @@ class BustaPagaManager(models.Manager):
         obj.arrotondamento = rounded - netto
 
         obj.save()
-
-
-
 
 
 class StatoContrattualeManager(models.Manager):
@@ -64,7 +74,7 @@ class StatoContrattualeManager(models.Manager):
         obj.tfr_anticipato += mese.anticipo_tfr
 
         obj.ore_ferie_dovute += mese.contratto.rateo_mensile_ore_ferie
-        obj.ore_ferie_godute += mese.giorni_ferie_goduti
+        obj.ore_ferie_godute += mese.ore_ferie_godute
 
         obj.cassa_colf_dl += mese.bustapaga.ore_retribuite*mese.contratto.quota_oraria_dl_trattenuta_malattia
         obj.cassa_colf_dip += mese.bustapaga.trattenuta_cassa_colf

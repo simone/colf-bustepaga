@@ -182,25 +182,94 @@
         </p></td>
 </tr>
 
+{% if mese.bustapaga.paga_ore_lavorate %}
 <tr>
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
         bordercolor="#C0C0C0" height="1" width="326">
         <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">RETRIBUZIONE LORDA
-            PER ORE LAVORATE </font></p></td>
+            ORDINARIA </font></p></td>
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
         bordercolor="#C0C0C0" height="1" width="109">
     </td>
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
         bordercolor="#C0C0C0" height="1" width="88">
-        <p style="margin-top: 0; margin-bottom: 0" align="right"></p></td>
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.ore_lavorate|floatformat:2 }}</font>
+        </p></td>
     <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
         bordercolor="#C0C0C0" height="1" width="104">
         <p style="margin-top: 0; margin-bottom: 0" align="right">
 
             <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.bustapaga.paga_ore_lavorate|floatformat:2 }}</font></p></td>
 </tr>
+{% endif %}
 
+{% if mese.bustapaga.paga_straordinario_25 %}
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">RETRIBUZIONE LORDA
+            PER ORE STRAORDINARIO 25% </font></p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">{{ mese.straordinario_25|floatformat:2 }}</font>
+        </p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
 
+            <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.bustapaga.paga_straordinario_25|floatformat:2 }}</font></p></td>
+</tr>
+{% endif %}
+
+{% if mese.bustapaga.paga_straordinario_50 %}
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">RETRIBUZIONE LORDA
+            PER ORE STRAORDINARIO 50% </font></p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">{{ mese.straordinario_50|floatformat:2 }}</font>
+        </p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.bustapaga.paga_straordinario_50|floatformat:2 }}</font></p></td>
+</tr>
+{% endif %}
+
+{% if mese.bustapaga.paga_straordinario_60 %}
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">RETRIBUZIONE LORDA
+            PER ORE STRAORDINARIO 60% </font></p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">{{ mese.straordinario_60|floatformat:2 }}</font>
+        </p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+
+            <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.bustapaga.paga_straordinario_60|floatformat:2 }}</font></p></td>
+</tr>
+{% endif %}
+
+{% if mese.giorni_festivita %}
 <tr>
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
         bordercolor="#C0C0C0" height="19" width="326">
@@ -218,7 +287,27 @@
         <p style="margin-top: 0; margin-bottom: 0" align="right">
             <font size="2" color="#000000" face="Verdana">{{ mese.bustapaga.paga_festivita|floatformat:2 }}</font></p></td>
 </tr>
+{% endif %}
 
+{% if mese.ore_ferie_godute %}
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="19" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">RETRIBUZIONE PER GIORNI DI FERIE&nbsp;</font>
+        </p></td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="19" width="109">
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="19" width="88">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">{{ mese.ore_ferie_godute|floatformat:2 }}/{{ mese.giorni_ferie_goduti|floatformat:2 }}</font></p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="19" width="104">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">{{ mese.bustapaga.paga_ferie|floatformat:2 }}</font></p></td>
+</tr>
+{% endif %}
 
 <tr>
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
@@ -240,6 +329,7 @@
 </tr>
 
 
+
 <tr>
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
         bordercolor="#C0C0C0" height="1" width="326">
@@ -259,45 +349,8 @@
 </tr>
 
 
-<tr>
-    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
-        bordercolor="#C0C0C0" height="1" width="326">
-        <p style="margin-top: 0; margin-bottom: 0">
-            <font face="Arial" size="1">ORE LAVORATE NEL MESE</font></p></td>
-    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
-        bordercolor="#C0C0C0" height="1" width="109">
-    </td>
 
 
-    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
-        bordercolor="#C0C0C0" height="1" width="88">
-        <p align="right" style="margin-top: 0; margin-bottom: 0">
-            <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.ore_lavorate|floatformat:2 }}</font>
-        </p></td>
-    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
-        bordercolor="#C0C0C0" height="1" width="104">
-        <p style="margin-top: 0; margin-bottom: 0">
-        </p></td>
-</tr>
-
-<tr>
-    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
-        bordercolor="#C0C0C0" height="1" width="326">
-        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">&nbsp;</font></p></td>
-    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
-        bordercolor="#C0C0C0" height="1" width="109">
-    </td>
-    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
-        bordercolor="#C0C0C0" height="1" width="88">
-        <p style="margin-top: 0; margin-bottom: 0">
-        </p></td>
-    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
-        bordercolor="#C0C0C0" height="1" width="104">
-        <p align="right" style="margin-top: 0; margin-bottom: 0">
-            <font size="2" color="#000000" face="Verdana">&nbsp;
-
-            </font></p></td>
-</tr>
 <tr>
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
         bordercolor="#C0C0C0" height="1" width="326">
@@ -595,18 +648,18 @@
 <tr>
     <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1"
         width="326">
-        &nbsp;<font size="1" color="#666666" face="Verdana">{{ mese.statocontrattuale.ore_ferie_dovute|floatformat:2 }}</font></td>
+        &nbsp;<font size="1" color="#000000" face="Verdana">{{ mese.statocontrattuale.ore_ferie_dovute|floatformat:2 }}</font></td>
     <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1"
         width="109">
-        &nbsp;&nbsp;<font size="1" color="#666666" face="Verdana">{{ mese.statocontrattuale.ore_ferie_godute|floatformat:2 }}</font></td>
+        &nbsp;&nbsp;<font size="1" color="#000000" face="Verdana">{{ mese.statocontrattuale.ore_ferie_godute|floatformat:2 }}</font></td>
     <td style="border-width:1; border-style:solid; " bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1"
         width="88">
-        &nbsp;<font size="1" color="#666666" face="Verdana">{{ mese.statocontrattuale.ore_ferie_residue|floatformat:2 }}
+        &nbsp;<font size="1" color="#000000" face="Verdana">{{ mese.statocontrattuale.ore_ferie_residue|floatformat:2 }}
     </font></td>
     <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
         bordercolor="#C0C0C0" align="center" bgcolor="#E6E6E6" height="1" width="104">
         <font face="Arial" color="#E0E0E0">
-            <font size="1" color="#666666" face="Verdana">{{ mese.statocontrattuale.giorni_ferie_residue|floatformat:2 }}</font></font></td>
+            <font size="1" color="#000000" face="Verdana">{{ mese.statocontrattuale.giorni_ferie_residue|floatformat:2 }}</font></font></td>
 
 </tr>
 <tr>

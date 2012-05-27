@@ -29,6 +29,14 @@ class MeseAdmin(ModelAdmin):
     # actions = ["calcola_bustapaga", "rimuovi_bustapaga"]
     list_filter = ["contratto__dip", "contratto__dl", "mese", "anno"]
 
+    fieldsets = (
+        ('Mese', {'fields' : ('contratto', 'anno', 'mese', 'giorni_lavorabili')},),
+        ('Lavotate', {'fields' : ('ore_lavorate','straordinario_25', 'straordinario_50', 'straordinario_60')},),
+        ('Ferie', {'fields' : ('giorni_ferie_goduti',)},),
+        ('Permessi', {'fields' : ('ore_permessi', 'permessi_per_lutto_o_visite_mediche', 'permessi_matrimoniali')},),
+        ('Anticipi', {'fields' : ('anticipo_tfr',)},),
+        )
+
     def calcola(self, obj):
         return "<a href='calcola/%s'>%s</a>" % (obj.pk, "Ricalcola" if obj.elaborato() else "Calcola")
     calcola.allow_tags = True
@@ -117,7 +125,8 @@ class VersamentoAdmin(ModelAdmin):
     list_display = ["contratto", "anno", "trimestre", "importo_cassa_malattia", "importo_contributi", "importo_totale"]
     # actions = ["calcola_bustapaga", "rimuovi_bustapaga"]
     list_filter = ["contratto__dip", "contratto__dl", "anno", "trimestre"]
-
+    total_functions = {'importo_cassa_malattia': sum, "importo_contributi": sum, "importo_totale": sum}
+    change_list_template = "admin/change_list_with_totals.html"
 
 site.register(DatoreLavoro)
 site.register(Dipendente)
@@ -129,6 +138,8 @@ site.register(Versamento, VersamentoAdmin)
 
 class BustaPagaAdmin(ReadOnlyModelAdmin):
     list_display = ["mese", "contratto", "totale_lordo", "totale_trattenute", "arrotondamento", "netto_pagato"]
+    total_functions = {'totale_lordo': sum, "totale_trattenute": sum, "netto_pagato": sum}
+    change_list_template = "admin/change_list_with_totals.html"
 
 site.register(BustaPaga, BustaPagaAdmin)
 #site.register(StatoContrattuale, ReadOnlyModelAdmin)

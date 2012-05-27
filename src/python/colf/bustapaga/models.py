@@ -208,7 +208,7 @@ class Contratto(models.Model):
 
     @property
     def ferie_ore_spettanti_annuali(self):
-        return Decimal("4.333") * self.ore_settimanali
+        return self.ore_settimanali * Decimal("52") / Decimal("12")#4.333
 
     @property
     def rateo_mensile_ore_ferie(self):
@@ -259,12 +259,21 @@ class Mese(models.Model):
         return self.elaborato() and not self.has_mese_successivo
     annullabile.boolean = True
 
-    @property
-    def giorni_ferie_goduti(self):
-        return 0
+    giorni_ferie_goduti = models.SmallIntegerField(help_text="tutte le ore settimanali = 6 giorni", default=0)
 
-    ore_lavorate = models.DecimalField(max_digits=11, decimal_places=2)
+    @property
+    def ore_ferie_godute(self):
+        return self.giorni_ferie_goduti * self.contratto.ferie_ore_spettanti_annuali / Decimal(26)
+
+    ore_lavorate = models.DecimalField("Ore ordinarie lavorate", max_digits=11, decimal_places=2)
+    straordinario_25 = models.DecimalField("25%, se prestato dalle ore 6.00 alle ore 22,00", max_digits=11, decimal_places=2, default=0)
+    straordinario_50 = models.DecimalField("50%, se prestato dalle ore 22.00 alle ore 6,00", max_digits=11, decimal_places=2, default=0)
+    straordinario_60 = models.DecimalField("60%, se prestato di domenica o in una delle festività", max_digits=11, decimal_places=2, default=0)
     anticipo_tfr = models.DecimalField(max_digits=11, decimal_places=2, default=Decimal(0))
+
+    ore_permessi = models.SmallIntegerField(default=0)
+    permessi_per_lutto_o_visite_mediche = models.SmallIntegerField(default=0)
+    permessi_matrimoniali = models.SmallIntegerField(default=0)
 
     @property
     def has_mese_precedente(self):
@@ -305,7 +314,18 @@ class BustaPaga(models.Model):
 
     #retribuzione_mensile_di_fatto
     paga_ore_lavorate = models.DecimalField(max_digits=11, decimal_places=2)
+
+    # straordinario
+    paga_straordinario_25 = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+    paga_straordinario_50 = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+    paga_straordinario_60 = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+
+    @property
+    def paga_straordinario(self):
+        return self.paga_straordinario_25 + self.paga_straordinario_50 + self.paga_straordinario_60
+
     paga_festivita = models.DecimalField(max_digits=11, decimal_places=2)
+    paga_ferie = models.DecimalField(max_digits=11, decimal_places=2, default=0)
 
     @property
     def calcolo_tfr_quota_mese(self):
@@ -313,7 +333,7 @@ class BustaPaga(models.Model):
 
     @property
     def totale_lordo(self):
-        return self.paga_festivita + self.paga_ore_lavorate
+        return self.paga_festivita + self.paga_ore_lavorate + self.paga_ferie + self.paga_straordinario
 
     trattenuta_inps = models.DecimalField(max_digits=11, decimal_places=2)
     trattenuta_cassa_colf = models.DecimalField(max_digits=11, decimal_places=2)
@@ -406,7 +426,7 @@ class Versamento(models.Model):
     @property
     def importo_totale(self):
         return self.importo_cassa_malattia + self.importo_contributi
-    
+
     class Meta:
         verbose_name_plural = "Versamenti"
 
