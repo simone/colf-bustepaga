@@ -228,11 +228,12 @@ class Contratto(models.Model):
         )
 
 
-
+MESI = list(MONTHS.items())
+MESI += [(13, "tredicesima")]
 
 class Mese(models.Model):
     anno = YearField()
-    mese = models.SmallIntegerField(choices=MONTHS.items())
+    mese = models.SmallIntegerField(choices=MESI)
 
     contratto = models.ForeignKey(Contratto)
 
@@ -286,6 +287,8 @@ class Mese(models.Model):
     @cached_property
     def mese_precedente(self):
         a, m = (self.anno, self.mese-1) if self.mese > 1 else (self.anno-1, 12)
+        if self.mese == 12: m = 13
+        if self.mese == 13: m = 11
         print self.anno, self.mese, a, m, self.mese > 1
         return self.contratto.mese_set.get(anno=a, mese=m)
 
@@ -299,7 +302,10 @@ class Mese(models.Model):
 
     @cached_property
     def mese_successivo(self):
-        a, m = (self.anno, self.mese+1) if self.mese < 12 else (self.anno+1, 1)
+        a, m = (self.anno, self.mese+1)
+        if self.mese == 11: m = 13
+        if self.mese == 12: a, m = a+1, 1
+        if self.mese == 13: m = 12
         return self.contratto.mese_set.get(anno=a, mese=m)
 
     def __unicode__(self):
@@ -327,13 +333,16 @@ class BustaPaga(models.Model):
     paga_festivita = models.DecimalField(max_digits=11, decimal_places=2)
     paga_ferie = models.DecimalField(max_digits=11, decimal_places=2, default=0)
 
+    paga_tredicesima = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+    anticipo_tfr = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+
     @property
     def calcolo_tfr_quota_mese(self):
-        return self.paga_ore_lavorate / Decimal("13.5")
+        return (self.totale_lordo-self.anticipo_tfr) / Decimal("13.5")
 
     @property
     def totale_lordo(self):
-        return self.paga_festivita + self.paga_ore_lavorate + self.paga_ferie + self.paga_straordinario
+        return self.paga_festivita + self.paga_ore_lavorate + self.paga_ferie + self.paga_straordinario + self.anticipo_tfr + self.paga_tredicesima
 
     trattenuta_inps = models.DecimalField(max_digits=11, decimal_places=2)
     trattenuta_cassa_colf = models.DecimalField(max_digits=11, decimal_places=2)

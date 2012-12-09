@@ -182,6 +182,29 @@
         </p></td>
 </tr>
 
+{% if mese.mese = 13 %}
+
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">TREDICESIMA</font></p></td>
+    <td style="text-align:center; border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+        <font size="2" color="#000000" face="Verdana">{{ mese.anno }}</font>
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+            <font size="2" color="#000000" face="Verdana">&nbsp;</font>
+        </p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p style="margin-top: 0; margin-bottom: 0" align="right">
+
+            <font size="2" color="#000000" face="Verdana">{{ mese.bustapaga.paga_tredicesima|floatformat:2 }}</font></p></td>
+</tr>
+
+{% else %}
 {% if mese.bustapaga.paga_ore_lavorate %}
 <tr>
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
@@ -341,7 +364,7 @@
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
         bordercolor="#C0C0C0" height="1" width="88">
         <p align="right" style="margin-top: 0; margin-bottom: 0">
-            <font size="2" color="#000000" face="Verdana">&nbsp;{{ mese.bustapaga.ore_retribuite|floatformat:2 }}</font></p></td>
+            <font size="2" color="#000000" face="Verdana">{{ mese.bustapaga.ore_retribuite|floatformat:2 }}</font></p></td>
     <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
         bordercolor="#C0C0C0" height="1" width="104">
         <p style="margin-top: 0; margin-bottom: 0">
@@ -349,7 +372,26 @@
 </tr>
 
 
+{% if mese.anticipo_tfr %}
+<tr>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="326">
+        <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="1">ANTICIPO TFR</font></p></td>
+    <td style="text-align:center; border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="109">
+        <font size="2" color="#000000" face="Verdana">{{ mese.anno }}</font>
+    </td>
+    <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="88">
+        <p align="right" style="margin-top: 0; margin-bottom: 0">
 
+        </p></td>
+    <td style="border-right:1px solid #C0C0C0; border-left-style:solid; border-top-style:solid; border-bottom-style:solid; border-left-width:1; border-top-width:1; border-bottom-width:1"
+        bordercolor="#C0C0C0" height="1" width="104">
+        <p align="right" style="margin-top: 0; margin-bottom: 0">
+            <font size="2" color="#000000" face="Verdana">{{ mese.bustapaga.anticipo_tfr|floatformat:2 }}</font></p></td>
+</tr>
+{% endif %}
 
 <tr>
     <td style="border-left-style:solid; border-left-width:1; border-top-style:solid; border-top-width:1; border-bottom-style:solid; border-bottom-width:1"
@@ -366,6 +408,7 @@
         bordercolor="#C0C0C0" height="1" width="104">
         <p align="right" style="margin-top: 0; margin-bottom: 0">
             <font size="2" color="#000000" face="Verdana">&nbsp;
+
 
             </font></p></td>
 </tr>
@@ -489,6 +532,7 @@
 
 </tr>
 
+{% endif %}
 
 <tr>
     <td style="border-left:1px solid #E6E6E6; padding:0; border-right-style:none; border-right-width:medium; border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px"

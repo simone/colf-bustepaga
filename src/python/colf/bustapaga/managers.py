@@ -46,6 +46,13 @@ class BustaPagaManager(models.Manager):
         else:
             obj.paga_festivita = 0
 
+        obj.anticipo_tfr = mese.anticipo_tfr
+
+        if mese.mese == 13:
+            obj.paga_tredicesima = sum([busta.totale_lordo-busta.anticipo_tfr for busta in self.filter(mese__anno=mese.anno, mese__mese__in=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])])/12
+        else:
+            obj.paga_tredicesima = 0
+
         obj.ore_retribuite = mese.ore_lavorate + (obj.paga_festivita + obj.paga_straordinario) / mese.contratto.paga_oraria + mese.ore_ferie_godute
 
         obj.trattenuta_inps = obj.ore_retribuite*mese.contratto.quota_oraria_dip_trattenuta_inps
@@ -69,17 +76,25 @@ class StatoContrattualeManager(models.Manager):
         obj = self.model(mese=mese) if not mese.has_mese_precedente else \
             mese.mese_precedente.statocontrattuale.makecopy(pk=None, mese=mese)
 
-        obj.tfr_quota_mese = mese.bustapaga.calcolo_tfr_quota_mese
-        obj.tfr_accumulato += obj.tfr_quota_mese
+        if mese.mese == 12: # il tfr_annuo lo calcolo su dicembre
+            tfr_annuo = sum([busta.totale_lordo-busta.anticipo_tfr for busta in mese.bustapaga.__class__.objects.filter(mese__anno=mese.anno)])/Decimal("13.5")
+            obj.tfr_quota_mese = tfr_annuo - obj.tfr_accumulato
+            obj.tfr_accumulato = tfr_annuo
+        else:
+            obj.tfr_quota_mese = mese.bustapaga.calcolo_tfr_quota_mese
+            obj.tfr_accumulato += obj.tfr_quota_mese
+
         obj.tfr_anticipato += mese.anticipo_tfr
 
-        obj.ore_ferie_dovute += mese.contratto.rateo_mensile_ore_ferie
-        obj.ore_ferie_godute += mese.ore_ferie_godute
+        if mese.mese < 13:
 
-        obj.cassa_colf_dl += mese.bustapaga.ore_retribuite*mese.contratto.quota_oraria_dl_trattenuta_malattia
-        obj.cassa_colf_dip += mese.bustapaga.trattenuta_cassa_colf
+            obj.ore_ferie_dovute += mese.contratto.rateo_mensile_ore_ferie
+            obj.ore_ferie_godute += mese.ore_ferie_godute
 
-        obj.contributi_inps_dl += mese.bustapaga.ore_retribuite*mese.contratto.quota_oraria_dl_trattenuta_inps
-        obj.contributi_inps_dip += mese.bustapaga.trattenuta_inps
+            obj.cassa_colf_dl += mese.bustapaga.ore_retribuite*mese.contratto.quota_oraria_dl_trattenuta_malattia
+            obj.cassa_colf_dip += mese.bustapaga.trattenuta_cassa_colf
+
+            obj.contributi_inps_dl += mese.bustapaga.ore_retribuite*mese.contratto.quota_oraria_dl_trattenuta_inps
+            obj.contributi_inps_dip += mese.bustapaga.trattenuta_inps
 
         obj.save()
